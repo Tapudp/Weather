@@ -24,3 +24,7 @@
          event.preventDefault(); // 
       }
       ```
+
+### API-signup
+   - simple signup at https://home.openweathermap.org/
+   - put the generated API_KEY in the `actions/index.js`
