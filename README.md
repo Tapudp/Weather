@@ -16,3 +16,11 @@
       ```
       this.onInputChange = this.onInputChange.bind(this);
       ```
+### Form Elements
+   - `onClick` handler and also the url changes with `?` while pressing enter that submiting it by default
+   - so `onSubmit = {this.onFormSubmit}`
+   - ```
+      onFormSubmit(event) {
+         event.preventDefault(); // 
+      }
+      ```
