@@ -28,3 +28,10 @@
 ### API-signup
    - simple signup at https://home.openweathermap.org/
    - put the generated API_KEY in the `actions/index.js`
+
+### Middleware
+   - they are function that take action, and depending on the action type and payload 
+      Lets the action pass through, manipulates it, logs it or stops it
+      - they stop any action and inspect it
+      - before they reach any reducer
+   - using `redux-promise` library for AJAX requests from the weather api to `redux`
