@@ -148,9 +148,27 @@ and in /reducers/reducer_weather.js
 instead of just having a string it would be a variable
 
 - never do something like `state.push( action.payload.data );` it will be mutated and must use **this.setState()**
-whenever we are inside a reducer we never mutate a state we return a completely new state
+whenever we are inside a reducer we never mutate a state; we return a completely new state
 so we should instead return out a new array entirely
       state.concat([action.payload.data]) because concat puts the new data into the existing one
 - ES6 allows a slightly different way
       return [actions.payload.data, ...state]; // just spreaded the state in the new array
 - basically we never want to manipulate the state
+
+### Building a List container
+- the purpose of this thing to render the list of cities so it needs access to reducer so it would be container
+- rendered with a table and import it in the main app
+- so use the `reducer_weather.js` and the main reducer we have it as `weather: WeatherReducer` so in the `/containers/weather_list.js`
+      function mapStateToProps(state) {
+            return { weather: state.weather }; // which is coming directly from the reducer itself
+      }
+ we can directly write `{ weather }` instead of `state.weather`because **ES6** which is same as `const weather = state.weather;`
+      function mapStateToProps({ weather }){
+            return { weather: weather }
+      }
+ but again with **ES6** the key: value names are same so we can write it as `return { weather }` only
+      function mapStateToProps({ weather }){
+            return { weather }
+      }
+- and then `connect` from react-redux, so that WeatherList container connects with the normal one
+      export default connect(mapStateToProps)(WeatherList);
