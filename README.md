@@ -136,4 +136,21 @@ and in /reducers/reducer_weather.js
 
 
 ### Avoiding State Mutations in reducer
-- 
+- in the response we only care about the `data` object `action.payload.data`
+- decide what our the initial state would be ( an empty array), so rather than having initialy `state = null` -> `state= []`
+- switch statement to handle only the `fetchWeather` action type
+      
+      import { FETCH_WEATHER } from '../actions/index';
+      switch(action.type){
+            case FETCH_WEATHER:
+                  return [ action.payload.data ]; 
+      }
+instead of just having a string it would be a variable
+
+- never do something like `state.push( action.payload.data );` it will be mutated and must use **this.setState()**
+whenever we are inside a reducer we never mutate a state we return a completely new state
+so we should instead return out a new array entirely
+      state.concat([action.payload.data]) because concat puts the new data into the existing one
+- ES6 allows a slightly different way
+      return [actions.payload.data, ...state]; // just spreaded the state in the new array
+- basically we never want to manipulate the state
