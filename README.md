@@ -91,3 +91,46 @@
             this.setState({ term: '' });
       }
       ```
+### New Reduer FetchWeather
+- reducer_weather.js contains
+      ```
+      export default function(state = null, action){
+            console.log(`Action Created ${action}`);
+            return state;
+      }
+      ```
+- Adding that to RootReducer /reducers/index.js
+      ```
+      import { WeatherReducer } from './reducer_weather';
+      
+      const rootReducer = combineReducers({
+            //state: (state = () => state);
+            weather: WeatherReducer
+      });      
+      ```
+- now in Action Creator, just
+      ```
+      console.log('Request: ', request)
+      ```      
+
+- Redux-promise (middleware) looks at the in-coming action and looks at specifically `payload` property
+      if the `payload` is a `promise`, redux-promise stops the action entirely
+      here's an action and caught the `payload` of a `promise`, it would take care about it
+
+      - once the request finishes it dispatches a new action of the same `type` but with the `payload` of the resolved `request`
+      so in short it **unwraps** the `promise` for us
+
+      - this the promise that reducers really don't care about they really care about the data, so it stops the action it waits until the `promise` resolves and then it says I got the **resolved data**, here's the request from the server, I'm gonna now send that (Data) to the `reducer` as the **payload**
+      it would be horrible to end up with a promise inside the Reducer
+
+      - basically if the action has a promise as a payload, then it will stop the action
+            after the promise resolves, **create a new action and send it to reducers** , after the AJAX requests finished
+
+      - now remove /actions/index.js
+      ```
+      console.log(`Request: ${request}`);
+      ```
+      and in /reducers/reducer_weather.js
+      ```
+      console.log(`Action Received: ${action}`);
+      ```
