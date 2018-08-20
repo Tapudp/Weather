@@ -26,12 +26,36 @@
       ```
 
 ### API-signup
-   - simple signup at https://home.openweathermap.org/
-   - put the generated API_KEY in the `actions/index.js`
+- simple signup at https://home.openweathermap.org/
+- put the generated API_KEY in the `actions/index.js`
 
 ### Middleware
-   - they are function that take action, and depending on the action type and payload 
+-      they are function that take action, and depending on the action type and payload 
       Lets the action pass through, manipulates it, logs it or stops it
       - they stop any action and inspect it
       - before they reach any reducer
-   - using `redux-promise` library for AJAX requests from the weather api to `redux`
+      - using `redux-promise` library for AJAX requests from the weather api to `redux`
+
+### AJAX requests with Axios
+- in `actions/index.js`
+```
+      export const FETCH_WEATHER = 'FETCH_WEATHER';
+      export function fetchWeather(){
+            return {
+                  type: 'FETCH_WEATHER'
+            }
+      }
+```
+- have the copied url from the API url as the ROOT_URL in our action
+      ```
+      const ROOT_URL=`http://api.openweathermap.org/data/2.5/forecast?appid=${API_KEY}`
+      ```
+- to get the city, country name 
+      ```
+      const url = `${ROOT_URL}&q=${city},us`;
+      ```
+- A simple AJAX request will be handled by `AXIOS` library
+      ```
+      const request = axios.get(url)
+      ```it will return a promise
+- so pass that request into our action as `payload`
