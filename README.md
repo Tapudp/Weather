@@ -209,3 +209,38 @@ so we should instead return out a new array entirely
       ```
       <tr key = { cityData.city.name }>
       ```
+### Adding Sparkline charts
+ - react-sparkline Charts to render, it only takes array of number so we will have Temprature, Humidity, Pressure arrays
+      ```
+      const temps = cityData.list.map(weather => weather.main.temp)
+      ```
+ - `npm i -S react-sparklines`
+      ```
+      import { SparkLines, SparkLinesLine } from 'react-sparklines';
+      ```
+ - and also to render 
+      ```
+      <td>
+            <Sparklines height={120} width={120} data={temps}>
+                  <SparklinesLine color="cyan"/>
+            </Sparklines>
+      </td>
+      ```
+### Making a Reusable Chart Component
+ - since the chart <Sparkline> components doesn't need to take the variable data from so it would `/components/chart.js`
+ - made it a functional component
+      ```
+      <Chart data={temps} color="orange" />
+      ```
+
+      and chart.js looks like this
+
+      ```
+      import { Sparklines, SparklinesLine } from 'react-sparklines';
+
+      return(
+            <Sparklines height={120} width={120} data={props.data}>
+                  <SparklinesLine color={props.color} />
+            </Spartklines>
+      )
+      ```
