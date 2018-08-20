@@ -172,3 +172,20 @@ so we should instead return out a new array entirely
       }
 - and then `connect` from react-redux, so that WeatherList container connects with the normal one
       export default connect(mapStateToProps)(WeatherList);
+
+### Mapping props to a Render Helper
+ - in the container we will have an redux state which contians a `weather` array which has several objects per city names so just `map` over the array so we get one city per array
+      <tbody>
+            {this.props.weather.map(this.renderWeather)} // mapping over weather array
+      </tbody>
+ - which is like one city and then a list of all the temprature, pressure, humidity details to render from the Redux state i.e., reducer
+      returnWeather() {
+            return(
+                  <tr>
+                        <td>{ cityData.city.name }</td>
+                  </tr>
+            )
+      }
+ - because in the response it is specified as city.name; it all renders well now
+ - add the key in the list
+      <tr key = { cityData.city.name }>
