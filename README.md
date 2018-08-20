@@ -270,3 +270,24 @@ so we should instead return out a new array entirely
       }
       ```
  - also converted it into the Celcius directly from the `./containers/weather_list.js`
+
+### Styling and Google Maps
+ - addding `./style/style.css` which only works when its in the same folder as index.html
+ - because we have added the GoogleMaps API in the `index.html` already it is going to be easier for us to calculate
+ - adding google maps thing also, since its not going to use redux at all we will use it as component and not a container
+      ```
+      class GoogleMap extends Component {
+            componentDidMount(){
+                  new google.maps.Map(this.refs.map, {
+                        zoom: 12,
+                        center: {
+                              lat: this.prop.lat,
+                              lng: this.prop.lon,
+                        }
+                  })
+            }
+            render(){
+                  return <div ref="map" />
+            }
+      }
+      ```
