@@ -244,3 +244,29 @@ so we should instead return out a new array entirely
             </Spartklines>
       )
       ```
+
+### Labeling Units on the chart component
+ - for pressures and humidity the same thing
+      ```
+      const pressures = cityData.list.map(weather => weather.main.pressure);
+      const humidity = cityData.list.map(weather => weather.main.humidity);
+
+      <td><Chart data={pressures} color="green" /></td>
+      <td><Chart data={humidities} color="black" /></td>
+      ```
+
+ - now going to add numbers and line for the average value of each
+      for that bring in the  `{SparklinesReferenceLines}` and pass it as an additional child with a `type="avg"` for average
+ - now for the numerical average
+      ```
+      <div>{ average(props.data) }</div>
+      ```
+ average would be an helper function here
+ - to help us calculate the average we are gonna use the utility library `lodash` so install it since our setup is only with CRA
+ - and with `lodash` the utility to calculate average is pretty straight forward
+      ```
+      function average(data){
+            return _.round(_.sum(data)/data.length);
+      }
+      ```
+ - also converted it into the Celcius directly from the `./containers/weather_list.js`
