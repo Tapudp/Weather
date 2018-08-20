@@ -59,3 +59,35 @@
       const request = axios.get(url)
       ```it will return a promise
 - so pass that request into our action as `payload`
+
+### Redux promise in practice
+- in the search-bar.js
+      ```
+      import { connect } from 'react-redux`;
+      import { bindActionCreator } from 'redux`;
+      import { fetchWeather } from '../actions/index`;
+      ```
+
+      then dispatching all the props from this container's state to the redux reducer
+      ```
+      function mapDispatchToProps(dispatch){
+            return bindActionCreators({ fetchWeather }, dispatch);
+      }
+
+      export default connect(null, mapDispatchToProps)(SearchBar);
+      ```
+
+      bind the onFormSubmit method to the container state as well
+      ```
+      this.onFormSubmit = this.onFormSubmit.bind(this);
+      ```
+      - also adding this term to `onFormSubmit` with and also clearing the term with `setState` so that searchBar component will re-render without anything i.e., blank
+      ```
+      onFormSubmit(event){
+            event.preventDefault();
+
+            //we need to go and fetch weather data
+            this.props.fetchWeather(this.state.term);
+            this.setState({ term: '' });
+      }
+      ```
