@@ -291,3 +291,17 @@ so we should instead return out a new array entirely
             }
       }
       ```
+### Google map integration
+ - `componentDidMount` the lifecycle method will get called automatically after this component has been rendered to the sscreen
+ - `new google.maps.Map` an embedded google map inside document, it just takes an HTML node so that's why we are using `ref`
+ - so this is how 3rd party libraries/API knows where to render their content without knowing about default JSX or any other format
+ - so the weathermaps API gives us `lat` and `lng` as lattitude and logitude
+ - in WeatherList component add them and define 
+      ```
+      import GoogleMap from '../component/google_map';
+      const { lon, lat } = cityData.city.coord;
+      // const lat = cityData.city.coord.lat; not individually but together
+
+      <td> <GoogleMap lon={lon} lat={lat} /> </td>
+      ```
+ - style the rendered little google map

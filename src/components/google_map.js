@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
+import google from 'react-google-maps';
 
-class GoogleMap extends Component {
+export default class GoogleMap extends Component {
    componentDidMount(){
       new google.maps.Map(this.refs.map, {
          zoom: 12,
@@ -8,8 +9,9 @@ class GoogleMap extends Component {
             lat: this.props.lat,
             lng: this.props.lon
          }
-      })
+      });
    }
+
    render(){
       return(
          // this.refs.map
@@ -17,5 +19,3 @@ class GoogleMap extends Component {
       )
    }
 }
-
-export default GoogleMap;
