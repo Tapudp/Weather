@@ -159,24 +159,30 @@ so we should instead return out a new array entirely
 - the purpose of this thing to render the list of cities so it needs access to reducer so it would be container
 - rendered with a table and import it in the main app
 - so use the `reducer_weather.js` and the main reducer we have it as `weather: WeatherReducer` so in the `/containers/weather_list.js`
+
       ```
       function mapStateToProps(state) {
             return { weather: state.weather }; // which is coming directly from the reducer itself
       }
       ```
  we can directly write `{ weather }` instead of `state.weather`because **ES6** which is same as `const weather = state.weather;`
+
       ```
       function mapStateToProps({ weather }){
             return { weather: weather }
       }
       ```
+
  but again with **ES6** the key: value names are same so we can write it as `return { weather }` only
+
       ```
       function mapStateToProps({ weather }){
             return { weather }
       }
       ```
+
 - and then `connect` from react-redux, so that WeatherList container connects with the normal one
+
       ```
       export default connect(mapStateToProps)(WeatherList);
       ```
