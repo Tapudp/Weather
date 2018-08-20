@@ -62,27 +62,26 @@
 
 ### Redux promise in practice
 - in the search-bar.js
-      ```
+
       import { connect } from 'react-redux`;
       import { bindActionCreator } from 'redux`;
       import { fetchWeather } from '../actions/index`;
-      ```
 
-      then dispatching all the props from this container's state to the redux reducer
-      ```
+then dispatching all the props from this container's state to the redux reducer
+      
       function mapDispatchToProps(dispatch){
             return bindActionCreators({ fetchWeather }, dispatch);
       }
 
       export default connect(null, mapDispatchToProps)(SearchBar);
-      ```
+      
 
-      bind the onFormSubmit method to the container state as well
-      ```
+bind the onFormSubmit method to the container state as well
+     
       this.onFormSubmit = this.onFormSubmit.bind(this);
-      ```
-      - also adding this term to `onFormSubmit` with and also clearing the term with `setState` so that searchBar component will re-render without anything i.e., blank
-      ```
+     
+- also adding this term to `onFormSubmit` with and also clearing the term with `setState` so that searchBar component will re-render without anything i.e., blank
+
       onFormSubmit(event){
             event.preventDefault();
 
@@ -90,30 +89,28 @@
             this.props.fetchWeather(this.state.term);
             this.setState({ term: '' });
       }
-      ```
+
 ### New Reduer FetchWeather
 - reducer_weather.js contains
-      ```
+
       export default function(state = null, action){
             console.log(`Action Created ${action}`);
             return state;
       }
-      ```
+
 - Adding that to RootReducer /reducers/index.js
-      
-      ```
+
       import { WeatherReducer } from './reducer_weather';
       
       const rootReducer = combineReducers({
             //state: (state = () => state);
             weather: WeatherReducer
       });      
-      ```
+
 - now in Action Creator, just
-      
-      ```
+
       console.log('Request: ', request)
-      ```      
+ 
 
 - Redux-promise (middleware) looks at the in-coming action and looks at specifically `payload` property
 if the `payload` is a `promise`, redux-promise stops the action entirely
@@ -130,13 +127,13 @@ so in short it **unwraps** the `promise` for us
 - this all happens because of **axios** which gets the data **asynschonously** but makes it look like **synchronous** 
 
 - now remove /actions/index.js
-      ```
+ 
       console.log(`Request: ${request}`);
-      ```
-      and in /reducers/reducer_weather.js
-      ```
+
+and in /reducers/reducer_weather.js
+ 
       console.log(`Action Received: ${action}`);
-      ```
+
 
 ### Avoiding State Mutations in reducer
 - 
