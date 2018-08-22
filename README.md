@@ -305,3 +305,31 @@ so we should instead return out a new array entirely
       <td> <GoogleMap lon={lon} lat={lat} /> </td>
       ```
  - style the rendered little google map
+
+### final working
+ - to make the google maps work with CRA ( create react app), one needs to add
+      ```
+      import React, {Component} from 'react';
+      const google = window.google; // very important when using CRA 
+ 
+      class GoogleMap extends Component {
+            componentDidMount() {
+                  new google.maps.Map(this.refs.map, {
+                  zoom: 12,
+                  center: {
+                  lat: this.props.lat,
+                  lng: this.props.lon
+                  }
+            });
+      }
+ 
+      render() {
+              return <div ref="map" />;
+            }
+      }
+      export default GoogleMap;
+      ```
+ - also added the India as in for Indian cities by adding the following in `./src/actions/index.js`
+      ```
+      const url = `${ROOT_URL}&q=${city},in`;
+      ```
